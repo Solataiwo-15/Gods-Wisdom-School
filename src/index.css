@@ -1,0 +1,11 @@
+/*
+  This resets the default margin and padding on the main page elements,
+  ensuring our components can go truly edge-to-edge.
+*/
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
