@@ -7,42 +7,40 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-// We will use icons from the "Font Awesome" icon set
 import { FaBook, FaUsers, FaShieldAlt } from "react-icons/fa";
-// This is the fix: use 'import type' for type-only imports
 import type { IconType } from "react-icons";
 
-// Define a 'type' or 'interface' for our Feature component's props
 interface FeatureProps {
   title: string;
   text: string;
   icon: IconType;
 }
 
-// A single feature component
-// Apply the types to the component's props
 const Feature = ({ title, text, icon }: FeatureProps) => {
   return (
     <VStack spacing={4} textAlign="center">
-      <Icon as={icon} w={12} h={12} color="brand.500" />
-      <Heading as="h3" size="md" fontWeight="bold">
+      {/* Icon is now a lighter blue to stand out on the dark background */}
+      <Icon as={icon} w={12} h={12} color="brand.300" />
+      {/* Heading is pure white */}
+      <Heading as="h3" size="md" fontWeight="bold" color="white">
         {title}
       </Heading>
-      <Text color="gray.600">{text}</Text>
+      {/* Text is a light gray for a softer feel */}
+      <Text color="gray.300">{text}</Text>
     </VStack>
   );
 };
 
 export const Features = () => {
-  // ... rest of the component code is the same
   return (
-    <Box p={{ base: 10, md: 20 }}>
-      <Container maxW="container.lg">
+    // Use our darkest brand blue for the background
+    <Box bg="brand.900" color="white">
+      <Container maxW="container.lg" py={{ base: 16, md: 20 }}>
         <VStack spacing={4} as="section" mb={16}>
           <Heading as="h2" size="xl" fontWeight="bold">
             Why Choose Us?
           </Heading>
-          <Text fontSize="lg" color="gray.500">
+          <Text fontSize="lg" color="gray.300">
             We are dedicated to providing the best learning environment.
           </Text>
         </VStack>
@@ -65,7 +63,7 @@ export const Features = () => {
             icon={FaShieldAlt}
             title={"Safe & Nurturing Environment"}
             text={
-              "We prioritize a safe, inclusive, and supportive atmosphere where every child can thrive and and feel valued."
+              "We prioritize a safe, inclusive, and supportive atmosphere where every child can thrive and feel valued."
             }
           />
         </SimpleGrid>

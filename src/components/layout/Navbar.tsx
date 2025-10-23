@@ -13,13 +13,15 @@ import {
   DrawerHeader,
   DrawerBody,
   VStack,
+  Image,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
-// 1. Import the type for the 'children' prop from React
 import type { ReactNode } from "react";
+// I'm using the original 'logo.png' name, but if you renamed yours to 'school-logo.jpg',
+// make sure this line matches your actual file name.
+import schoolLogo from "../../assets/school-logo.jpg";
 
-// 2. Define the types for our link component props
 interface NavLinkProps {
   to: string;
   children: ReactNode;
@@ -28,26 +30,22 @@ interface NavLinkProps {
 interface MobileNavLinkProps {
   to: string;
   children: ReactNode;
-  onClose: () => void; // The onClick handler is a function that returns nothing
+  onClose: () => void;
 }
 
 export const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  // 3. Apply the types to the component's props
   const NavLink = ({ to, children }: NavLinkProps) => (
     <Link to={to}>
-      <Button variant="link" color="white">
+      <Button variant="link" color="brand.700">
         {children}
       </Button>
     </Link>
   );
 
-  // 4. Apply the types here as well
   const MobileNavLink = ({ to, children, onClose }: MobileNavLinkProps) => (
     <Link to={to} onClick={onClose}>
-      {" "}
-      {/* Close drawer on click */}
       <Button variant="link" color="white" size="lg">
         {children}
       </Button>
@@ -55,36 +53,59 @@ export const Navbar = () => {
   );
 
   return (
-    <Box bg="brand.500" p={4} color="white">
+    <Box
+      bg="white"
+      px={5}
+      py={3}
+      boxShadow="sm"
+      position="sticky"
+      top="0"
+      zIndex="banner"
+    >
       <Flex maxW="1200px" margin="0 auto" align="center">
         <Link to="/">
-          <Heading as="h1" size="lg">
-            God's Wisdom School
-          </Heading>
+          {/* We need to apply Flex here to group the logo and text */}
+          <Flex align="center">
+            <Image
+              src={schoolLogo}
+              alt="God's Wisdom School Logo"
+              // Change 1: Responsive boxSize. 45px on mobile, 60px on desktop.
+              boxSize={{ base: "40px", md: "55px" }}
+            />
+            <Heading
+              as="h1"
+              size="md"
+              ml={3} // Reduced margin a bit
+              // Change 2: Explicitly set the color to our brand blue.
+              color="brand.700"
+              display={{ base: "none", md: "block" }}
+            >
+              God's Wisdom Schools
+            </Heading>
+          </Flex>
         </Link>
 
         <Spacer />
 
-        {/* Desktop Navigation Links */}
         <HStack spacing={8} display={{ base: "none", md: "flex" }}>
           <NavLink to="/">Home</NavLink>
+          {/* Change 3: Let's make the link text consistent */}
           <NavLink to="/about">About</NavLink>
           <NavLink to="/admissions">Admissions</NavLink>
           <NavLink to="/contact">Contact</NavLink>
         </HStack>
 
-        {/* Mobile Hamburger Icon */}
         <IconButton
           aria-label="Open Menu"
           icon={<HamburgerIcon />}
           size="lg"
           variant="ghost"
+          color="brand.700"
           display={{ base: "flex", md: "none" }}
           onClick={onOpen}
         />
       </Flex>
-
-      {/* Mobile Navigation Drawer */}
+      {/* The rest of the Drawer code is the same */}
       <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent bg="brand.500" color="white">
@@ -101,12 +122,11 @@ export const Navbar = () => {
           </DrawerHeader>
           <DrawerBody>
             <VStack spacing={6} align="start" mt={6}>
-              {/* 5. Pass the onClose function to the MobileNavLink */}
               <MobileNavLink to="/" onClose={onClose}>
                 Home
               </MobileNavLink>
               <MobileNavLink to="/about" onClose={onClose}>
-                About
+                About Us
               </MobileNavLink>
               <MobileNavLink to="/admissions" onClose={onClose}>
                 Admissions

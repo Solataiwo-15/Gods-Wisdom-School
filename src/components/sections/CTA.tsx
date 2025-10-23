@@ -1,4 +1,5 @@
 import { Box, Button, Container, Heading, Stack, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom"; // Import Link
 
 export const CTA = () => {
   return (
@@ -13,15 +14,24 @@ export const CTA = () => {
             Discover the enrollment process and become a part of the God's
             Wisdom School family.
           </Text>
-          <Button
-            colorScheme="whiteAlpha"
-            size="lg"
-            px="10"
-            py="7"
-            fontWeight="bold"
-          >
-            Apply Now
-          </Button>
+          {/* Link the button to the admissions page */}
+          <Link to="/admissions">
+            {/* --- THIS IS THE UPDATED BUTTON --- */}
+            <Button
+              bg="white" // Solid white background
+              color="brand.700" // Dark blue text color
+              size="lg"
+              px="10"
+              py="7"
+              fontWeight="bold"
+              // Add a subtle hover effect
+              _hover={{
+                bg: "gray.200",
+              }}
+            >
+              Apply Now
+            </Button>
+          </Link>
         </Stack>
       </Container>
     </Box>
