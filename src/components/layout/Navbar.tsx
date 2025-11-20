@@ -92,6 +92,7 @@ export const Navbar = () => {
           {/* Change 3: Let's make the link text consistent */}
           <NavLink to="/about">About</NavLink>
           <NavLink to="/admissions">Admissions</NavLink>
+          <NavLink to="/academics">Academics</NavLink>
           <NavLink to="/contact">Contact</NavLink>
         </HStack>
 
@@ -130,6 +131,9 @@ export const Navbar = () => {
               </MobileNavLink>
               <MobileNavLink to="/admissions" onClose={onClose}>
                 Admissions
+              </MobileNavLink>
+              <MobileNavLink to="/academics" onClose={onClose}>
+                Academics
               </MobileNavLink>
               <MobileNavLink to="/contact" onClose={onClose}>
                 Contact

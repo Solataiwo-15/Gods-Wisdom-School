@@ -1,24 +1,26 @@
 import {
-  Box,
   Heading,
   Text,
   Button,
   VStack,
   Container,
+  Flex,
   Image, // 1. Import the Image component
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 // 2. Import the background image you want to use (can be the same as the about page or a new one)
-import heroBgImage from "../../assets/about-bg.jpg";
+import heroBgImage from "../../assets/about-bg.png";
 
 export const Hero = () => {
   return (
-    <Box
-      position="relative" // We need position relative for the overlay and image
-      py={{ base: 20, md: 28 }}
+    <Flex
+      minH="90vh" // Set minimum height to 100% of the viewport height
+      align="center" // Vertically center the content
+      justify="center" // Horizontally center the content
+      position="relative"
       textAlign="center"
-      color="white" // Text will be white to show up on the dark overlay
-      overflow="hidden" // Contains the blur effect
+      color="white"
+      overflow="hidden"
       _before={{
         content: '""',
         position: "absolute",
@@ -26,11 +28,10 @@ export const Hero = () => {
         left: 0,
         right: 0,
         bottom: 0,
-        bg: "blackAlpha.600", // The dark overlay for readability
+        bg: "blackAlpha.600",
         zIndex: 1,
       }}
     >
-      {/* 3. The blurred background image */}
       <Image
         src={heroBgImage}
         alt="A beautiful view of the school or classroom"
@@ -44,25 +45,22 @@ export const Hero = () => {
         transform="scale(1.05)"
         zIndex="0"
       />
-      {/* 4. The content, which needs to be on a higher zIndex to appear on top */}
+      {/* The content container remains the same */}
       <Container maxW="container.md" position="relative" zIndex="2">
         <VStack spacing={6}>
           <Heading
             as="h1"
             fontSize={{ base: "4xl", md: "6xl" }}
             fontWeight="bold"
-            color="white" // Text color changed to white
+            color="white"
           >
-            Welcome to God's Wisdom Schools
+            Welcome to God's Wisdom School
           </Heading>
           <Text fontSize="xl" color="gray.200">
-            {" "}
-            {/* Subtitle is a light gray */}
             Nurturing young minds for a brighter future. Excellence in
             education, character, and service.
           </Text>
           <Link to="/admissions">
-            {/* The button is now white on the dark background */}
             <Button
               bg="white"
               color="brand.700"
@@ -76,6 +74,6 @@ export const Hero = () => {
           </Link>
         </VStack>
       </Container>
-    </Box>
+    </Flex>
   );
 };
