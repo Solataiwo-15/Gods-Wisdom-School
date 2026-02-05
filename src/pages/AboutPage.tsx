@@ -88,7 +88,7 @@ export const AboutPage = () => {
                 "We believe that every child deserves quality education and the
                 right support to achieve greatness..."
               </Text>
-              <Text fontWeight="bold" mt={4}>
+              <Text fontWeight="bold" mt={4} color="gray.700">
                 - Mr. Afolayan S. Oluwayomi, Principal
               </Text>
             </Box>
@@ -148,7 +148,7 @@ export const AboutPage = () => {
             <Heading as="h2" size="2xl" color="brand.800">
               Our Vision and Mission
             </Heading>
-            <List spacing={5} w="100%">
+            <List spacing={5} w="100%" color="gray.700">
               <SimpleGrid
                 columns={{ base: 1, md: 2 }}
                 spacingX={10}
@@ -229,7 +229,7 @@ export const AboutPage = () => {
                 "...whose passion and purpose were to help young learners
                 achieve their full potential."
               </Text>
-              <Text fontWeight="bold" mt={4}>
+              <Text fontWeight="bold" mt={4} color="gray.700">
                 - Mr. Richard Adepetun, Visionary Leader
               </Text>
             </Box>

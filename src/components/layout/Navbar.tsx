@@ -70,7 +70,7 @@ export const Navbar = () => {
               src={schoolLogo}
               alt="God's Wisdom School Logo"
               // Change 1: Responsive boxSize. 45px on mobile, 60px on desktop.
-              boxSize={{ base: "40px", md: "55px" }}
+              boxSize={{ base: "40px", md: "60px" }}
             />
             <Heading
               as="h1"
@@ -79,6 +79,7 @@ export const Navbar = () => {
               // Change 2: Explicitly set the color to our brand blue.
               color="brand.700"
               display={{ base: "none", md: "block" }}
+              textTransform="uppercase"
             >
               God's Wisdom Schools
             </Heading>

@@ -68,10 +68,10 @@ export const AcademicsPage = () => {
         <VStack spacing={12} align="stretch">
           {/* Curriculum Section */}
           <Box>
-            <Heading as="h2" size="xl" color="brand.800" mb={4}>
+            <Heading as="h2" size="xl" color="brand.500" mb={4}>
               Our Curriculum
             </Heading>
-            <Text fontSize="lg" color="gray.600">
+            <Text fontSize="lg" color="white">
               Our curriculum is a rich blend of Nigerian and international
               standards, designed to be comprehensive, engaging, and
               challenging. We focus on building a strong foundation in core
@@ -86,7 +86,7 @@ export const AcademicsPage = () => {
 
           {/* Extracurricular Activities Section */}
           <Box>
-            <Heading as="h2" size="xl" color="brand.800" mb={6}>
+            <Heading as="h2" size="xl" color="brand.500" mb={6}>
               Extracurricular Activities
             </Heading>
             <List spacing={4}>

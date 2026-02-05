@@ -9,3 +9,8 @@ body,
   padding: 0;
   height: 100%;
 }
+
+option {
+  background: white !important;
+  color: #2D3748 !important; /* This is the hex code for Chakra's gray.800 */
+}

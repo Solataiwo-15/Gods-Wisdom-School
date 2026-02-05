@@ -81,21 +81,15 @@ export const ContactPage = () => {
                   mt={1}
                 />
                 <Box>
-                  <Heading as="h3" size="md">
-                    Address
-                  </Heading>
                   <Text fontSize="lg" color="gray.600">
                     Along Ikuogbolekun way, Beside First Baptist Church,
                     Adegbayi, Ibadan
                   </Text>
                 </Box>
               </HStack>
-              <HStack spacing={4} align="flex-start">
+              <HStack spacing={4} align="flex-center">
                 <Icon as={FaPhone} color="brand.500" w={6} h={6} mt={1} />
                 <Box>
-                  <Heading as="h3" size="md">
-                    Phone
-                  </Heading>
                   <Text fontSize="lg" color="gray.600">
                     08077913943
                   </Text>
@@ -104,9 +98,6 @@ export const ContactPage = () => {
               <HStack spacing={4} align="flex-start">
                 <Icon as={FaEnvelope} color="brand.500" w={6} h={6} mt={1} />
                 <Box>
-                  <Heading as="h3" size="md">
-                    Email
-                  </Heading>
                   <Text fontSize="lg" color="gray.600">
                     info@godswisdomschools.com
                   </Text>
