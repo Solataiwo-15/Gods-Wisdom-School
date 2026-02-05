@@ -14,6 +14,8 @@ import {
   Box,
   Textarea,
   Checkbox,
+  Alert,
+  AlertIcon,
   Text,
   Divider,
   useToast,
@@ -398,6 +400,18 @@ export const SecondaryAdmissionForm = ({ onBack }: FormProps) => {
               </Text>
             </HStack>
           </FormControl>
+
+          {/* --- START OF THE FIX --- */}
+          {error && (
+            <Alert status="error" borderRadius="md">
+              <AlertIcon />
+              <Text fontSize="sm" color="red.500">
+                {" "}
+                {error}
+              </Text>
+            </Alert>
+          )}
+          {/* --- END OF THE FIX --- */}
 
           {/* ================= ACTION BUTTONS ================= */}
           <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={6} w="100%" pt={6}>
