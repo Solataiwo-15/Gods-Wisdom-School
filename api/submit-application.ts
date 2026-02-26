@@ -74,31 +74,61 @@ async function createPrimaryPdf(data: PrimaryFormData): Promise<Uint8Array> {
 
   page.drawImage(bgImage, { x: 0, y: 0, width, height });
 
-  const t = 11; // fontSize
-  const c = rgb(0, 0, 0); // color
+  const textSize = 11; // fontSize
+  const textColor = rgb(0, 0, 0); // color
 
-  // Coordinates from your previous adjustments
-  page.drawText(data.pupilName, { x: 140, y: 638, size: t, font, color: c });
-  page.drawText(data.homeAddress, { x: 145, y: 612, size: t, font, color: c });
-  page.drawText(data.dob, { x: 140, y: 585, size: t, font, color: c });
-  page.drawText(data.placeOfBirth, { x: 420, y: 585, size: t, font, color: c });
-  page.drawText(data.town, { x: 95, y: 558, size: t, font, color: c });
-  page.drawText(data.state, { x: 230, y: 558, size: t, font, color: c });
-  page.drawText(data.nationality, { x: 480, y: 558, size: t, font, color: c });
-  page.drawText(data.complexion, { x: 130, y: 532, size: t, font, color: c });
-  page.drawText(data.bestHobby, { x: 300, y: 532, size: t, font, color: c });
-  page.drawText(data.livingWithParents, { x: 530, y: 532, size: t, font, color: c });
-  if(data.reasonsNotLiving) page.drawText(data.reasonsNotLiving, { x: 180, y: 505, size: t, font, color: c });
-  page.drawText(data.prevSchoolName, { x: 100, y: 450, size: t, font, color: c });
-  page.drawText(data.prevSchoolYears, { x: 450, y: 450, size: t, font, color: c });
-  page.drawText(data.fatherName, { x: 140, y: 340, size: t, font, color: c });
-  page.drawText(data.fatherOccupation, { x: 170, y: 315, size: t, font, color: c });
-  page.drawText(data.fatherOfficeAddress, { x: 200, y: 290, size: t, font, color: c });
-  page.drawText(data.fatherHomeAddress, { x: 140, y: 265, size: t, font, color: c });
-  page.drawText(data.fatherPhone, { x: 170, y: 240, size: t, font, color: c });
-  page.drawText(data.motherName, { x: 140, y: 215, size: t, font, color: c });
-  page.drawText(data.motherHomeAddress, { x: 190, y: 190, size: t, font, color: c });
-  page.drawText(data.motherPhone, { x: 170, y: 165, size: t, font, color: c });
+  // PUPIL'S NAME
+  page.drawText(data.pupilName, { x: 140, y: 641, size: textSize, font, color: textColor });
+
+  // HOME ADDRESS
+  page.drawText(data.homeAddress, { x: 142, y: 625, size: textSize, font, color: textColor });
+
+  // DATE OF BIRTH & PLACE OF BIRTH
+  page.drawText(data.dob, { x: 140, y: 608, size: textSize, font, color: textColor });
+  page.drawText(data.placeOfBirth, { x: 360, y: 608, size: textSize, font, color: textColor });
+
+  // TOWN, STATE, AGE, NATIONALITY
+  page.drawText(data.town, { x: 85, y: 593, size: textSize, font, color: textColor });
+  page.drawText(data.state, { x: 180, y: 593, size: textSize, font, color: textColor });
+  // page.drawText("10", { x: 350, y: 558, size: textSize, font, color: textColor }); // Age (optional)
+  page.drawText(data.nationality, { x: 380, y: 593, size: textSize, font, color: textColor });
+
+  // COMPLEXION, HOBBY, PARENTS
+  page.drawText(data.complexion, { x: 115, y: 576, size: textSize, font, color: textColor });
+  page.drawText(data.bestHobby, { x: 225, y: 576, size: textSize, font, color: textColor });
+  const livingStatus = data.livingWithParents === 'yes' ? 'Yes' : 'No';
+  page.drawText(livingStatus, { x: 480, y: 576, size: textSize, font, color: textColor });
+
+  // REASON (If any)
+  if (data.reasonsNotLiving) {
+    page.drawText(data.reasonsNotLiving, { x: 180, y: 560, size: textSize, font, color: textColor });
+  }
+
+  // PREVIOUS SCHOOL
+  page.drawText(data.prevSchoolName, { x: 80, y: 512, size: textSize, font, color: textColor });
+  page.drawText(data.prevSchoolYears, { x: 380, y: 512, size: textSize, font, color: textColor });
+
+  //ATTESTIFICATION
+  page.drawText(data.pupilName, { x: 50, y: 447, size: textSize, font, color: textColor });
+
+  // --- PARENT'S INFO ---
+  // Father
+  page.drawText(data.fatherName, { x: 140, y: 364, size: textSize, font, color: textColor });
+  page.drawText(data.fatherOccupation, { x: 170, y: 348, size: textSize, font, color: textColor });
+  page.drawText(data.fatherOfficeAddress, { x: 170, y: 331, size: textSize, font, color: textColor });
+  page.drawText(data.fatherHomeAddress, { x: 140, y: 300, size: textSize, font, color: textColor });
+  page.drawText(data.fatherPhone, { x: 170, y: 285, size: textSize, font, color: textColor });
+
+  // Mother
+  page.drawText(data.motherName, { x: 140, y: 268, size: textSize, font, color: textColor });
+  page.drawText(data.motherHomeAddress, { x: 170, y: 252, size: textSize, font, color: textColor });
+  page.drawText(data.motherPhone, { x: 150, y: 220, size: textSize, font, color: textColor });
+
+  // --- SIGNATURES ---
+  const today = new Date().toLocaleDateString();
+  page.drawText(today, { x: 450, y: 152, size: 10, font, color: textColor });
+  page.drawText(today, { x: 450, y: 136, size: 10, font, color: textColor });
+  page.drawText(today, { x: 450, y: 120, size: 10, font, color: textColor });
 
   return await pdfDoc.save();
 }
