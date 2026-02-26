@@ -27,38 +27,41 @@ interface FormProps {
   onBack: () => void;
 }
 
-export const SecondaryAdmissionForm = ({ onBack }: FormProps) => {
-  const [formData, setFormData] = useState({
-    surname: "",
-    otherName: "",
-    dob: "",
-    placeOfBirth: "",
-    sex: "",
-    stateOfOrigin: "",
-    nationality: "Nigerian",
-    religion: "",
-    sponsorName: "",
-    relationship: "",
-    occupation: "",
-    sponsorPhone: "",
-    sponsorEmail: "",
-    businessAddress: "",
-    residentialAddress: "",
-    prevSchoolName: "",
-    prevSchoolDateFrom: "",
-    prevSchoolDateTo: "",
-    prevSchoolClassEntry: "",
-    prevSchoolClassExit: "",
-    healthConditions: "",
-    agreedToTerms: false,
-  });
+const initialFormValues = {
+  formType: "secondary",
+  surname: "",
+  otherName: "",
+  dob: "",
+  placeOfBirth: "",
+  sex: "",
+  stateOfOrigin: "",
+  nationality: "Nigerian",
+  religion: "",
+  sponsorName: "",
+  relationship: "",
+  occupation: "",
+  sponsorPhone: "",
+  sponsorEmail: "",
+  businessAddress: "",
+  residentialAddress: "",
+  prevSchoolName: "",
+  prevSchoolDateFrom: "",
+  prevSchoolDateTo: "",
+  prevSchoolClassEntry: "",
+  prevSchoolClassExit: "",
+  healthConditions: "",
+  agreedToTerms: false,
+};
 
+export const SecondaryAdmissionForm = ({ onBack }: FormProps) => {
+  const [formData, setFormData] = useState(initialFormValues);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const toast = useToast(); // For showing success/error popups
+  const toast = useToast();
 
+  // HANDLERS
   const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -69,19 +72,17 @@ export const SecondaryAdmissionForm = ({ onBack }: FormProps) => {
     setFormData((prev) => ({ ...prev, [name]: checked }));
   };
 
-  // --- THIS IS THE UPGRADED SUBMIT FUNCTION ---
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent page reload
-    setIsLoading(true); // Set loading state to true, disables the button
-    setError(null); // Clear any previous errors
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
 
     try {
-      // 4. Send a POST request to our API endpoint
       const response = await axios.post("/api/submit-application", formData);
-
-      // 5. If successful, log the response and show a success toast
       console.log("Server response:", response.data);
+
       setIsLoading(false);
+
       toast({
         title: "Application Submitted.",
         description: "We've received your application successfully!",
@@ -89,9 +90,10 @@ export const SecondaryAdmissionForm = ({ onBack }: FormProps) => {
         duration: 5000,
         isClosable: true,
       });
-      // Optionally, you can clear the form or redirect the user here
+
+      // 2. RESET THE FORM DATA HERE
+      setFormData(initialFormValues);
     } catch (err) {
-      // 6. If an error occurs, log it and show an error toast
       console.error("Submission error:", err);
       setError("An unexpected error occurred. Please try again later.");
       setIsLoading(false);
@@ -307,7 +309,7 @@ export const SecondaryAdmissionForm = ({ onBack }: FormProps) => {
             Student's Previous School Attended
           </Heading>
 
-          <FormControl isRequired>
+          <FormControl>
             <FormLabel color="gray.700">
               Name & Address of Institution
             </FormLabel>
@@ -320,7 +322,7 @@ export const SecondaryAdmissionForm = ({ onBack }: FormProps) => {
           </FormControl>
 
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
-            <FormControl isRequired>
+            <FormControl>
               <FormLabel color="gray.700">Date Attended From</FormLabel>
               <Input
                 name="prevSchoolDateFrom"
@@ -329,7 +331,7 @@ export const SecondaryAdmissionForm = ({ onBack }: FormProps) => {
                 onChange={handleInputChange}
               />
             </FormControl>
-            <FormControl isRequired>
+            <FormControl>
               <FormLabel color="gray.700">Date Attended To</FormLabel>
               <Input
                 name="prevSchoolDateTo"
@@ -341,7 +343,7 @@ export const SecondaryAdmissionForm = ({ onBack }: FormProps) => {
           </SimpleGrid>
 
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
-            <FormControl isRequired>
+            <FormControl>
               <FormLabel color="gray.700">Class of Entry</FormLabel>
               <Input
                 name="prevSchoolClassEntry"
@@ -350,7 +352,7 @@ export const SecondaryAdmissionForm = ({ onBack }: FormProps) => {
                 onChange={handleInputChange}
               />
             </FormControl>
-            <FormControl isRequired>
+            <FormControl>
               <FormLabel color="gray.700">Class of Exit</FormLabel>
               <Input
                 name="prevSchoolClassExit"

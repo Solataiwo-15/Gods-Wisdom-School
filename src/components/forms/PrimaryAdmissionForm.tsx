@@ -28,6 +28,7 @@ interface FormProps {
 
 // 1. Define initial values in one place
 const initialFormValues = {
+  formType: "primary",
   pupilName: "",
   homeAddress: "",
   dob: "",
